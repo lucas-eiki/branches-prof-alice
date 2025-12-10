@@ -27,17 +27,22 @@
 
 <script>
     var vt_alunos = []
-    var vt_nota1 = []
-    var vt_nota2 = []
-    var vt_nota3 = []
-    var vt_media = []
 
     function validarCadastro(nomeAluno, nota1, nota2, nota3) {
         let msgErro = ''
         if (nomeAluno.length < 9) {
             msgErro += '<br>Tem que conter ao menos 9 caracteres'
         }
-        if (vt_alunos.includes(nomeAluno)) {
+
+        let estaCadastrado = false
+        for(let i = 0; i < vt_alunos.length; i++) {
+            if(vt_alunos[i].nome == nomeAluno) {
+                estaCadastrado = true
+                break
+            }
+        }
+
+        if (estaCadastrado) {
             msgErro += '<br>Já existe um aluno cadastrado com esse nome'
         }
         if (
@@ -66,11 +71,15 @@
         resposta.innerHTML = ''
         if (validarCadastro(nomeAluno.trim(), iptNota1.value, iptNota2.value, iptNota3.value)) {
 
-            vt_alunos.push(nomeAluno)
-            vt_nota1.push(nota1)
-            vt_nota2.push(nota2)
-            vt_nota3.push(nota3)
-            vt_media.push(media)
+            let aluno = {
+                nome: nomeAluno,
+                nota1,
+                nota2,
+                nota3,
+                media
+            }
+
+            vt_alunos.push(aluno)
 
             alert('Aluno cadastrado com sucesso!')
         }
