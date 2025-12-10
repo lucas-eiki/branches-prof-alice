@@ -91,12 +91,12 @@
 
         if (respostaPrompt == 1) {
             for (i = vt_alunos.length - 1; i >= 0; i--) {
-                msgResposta += `<br>Aluno: ${vt_alunos[i]} – N1: ${(vt_nota1[i]).toFixed(1)} – N2: ${(vt_nota2[i]).toFixed(1)} – N3: ${(vt_nota3[i]).toFixed(1)} – Média: ${(vt_media[i]).toFixed(1)}`
+                msgResposta += `<br>Aluno: ${vt_alunos[i].nome} – N1: ${(vt_alunos[i].nota1).toFixed(1)} – N2: ${(vt_alunos[i].nota2).toFixed(1)} – N3: ${(vt_alunos[i].nota3).toFixed(1)} – Média: ${(vt_alunos[i].media).toFixed(1)}`
             }
         }
         else if (respostaPrompt == 2) {
             for (i = 0; i < vt_alunos.length; i++) {
-                msgResposta += `<br>Aluno: ${vt_alunos[i]} – N1: ${(vt_nota1[i]).toFixed(1)} – N2: ${(vt_nota2[i]).toFixed(1)} – N3: ${(vt_nota3[i]).toFixed(1)} – Média: ${(vt_media[i]).toFixed(1)}`
+                msgResposta += `<br>Aluno: ${vt_alunos[i].nome} – N1: ${(vt_alunos[i].nota1).toFixed(1)} – N2: ${(vt_alunos[i].nota2).toFixed(1)} – N3: ${(vt_alunos[i].nota3).toFixed(1)} – Média: ${(vt_alunos[i].media).toFixed(1)}`
             }
         } else {
             alert('Opção inexistente')
