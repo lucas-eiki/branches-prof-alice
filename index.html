@@ -140,22 +140,22 @@
         let indexAluno = 0
 
         if (respostaPrompt == 1) {
-            for (let i = 0; i < vt_media.length; i++) {
-                if (vt_media[i] > maiorMedia) {
-                    maiorMedia = vt_media[i]
-                    indexAluno = i
+            for (let i = 0; i < vt_alunos.length; i++) {
+                if (vt_alunos[i].media > maiorMedia) {
+                    maiorMedia = vt_alunos[i].media;
+                    indexAluno = i;
                 }
             }
-            msgResposta = `<br>Aluno: ${vt_alunos[indexAluno]} – N1: ${(vt_nota1[indexAluno]).toFixed(1)} – N2: ${(vt_nota2[indexAluno]).toFixed(1)} – N3: ${(vt_nota3[indexAluno]).toFixed(1)} – Média: ${(vt_media[indexAluno]).toFixed(1)} - Maior média: ${maiorMedia.toFixed(1)}`
+            msgResposta = `<br>Aluno: ${vt_alunos[indexAluno].nome} – N1: ${(vt_alunos[indexAluno].nota1).toFixed(1)} – N2: ${(vt_alunos[indexAluno].nota2).toFixed(1)} – N3: ${(vt_alunos[indexAluno].nota3).toFixed(1)} – Média: ${(vt_alunos[indexAluno].media).toFixed(1)} - Maior média: ${maiorMedia.toFixed(1)}`
         }
         else if (respostaPrompt == 2) {
-            for (let i = 0; i < vt_media.length; i++) {
-                if (vt_media[i] < menorMedia) {
-                    menorMedia = vt_media[i]
+            for (let i = 0; i < vt_alunos.length; i++) {
+                if (vt_alunos[i].media < menorMedia) {
+                    menorMedia = vt_alunos[i].media
                     indexAluno = i
                 }
             }
-            msgResposta = `<br>Aluno: ${vt_alunos[indexAluno]} – N1: ${(vt_nota1[indexAluno]).toFixed(1)} – N2: ${(vt_nota2[indexAluno]).toFixed(1)} – N3: ${(vt_nota3[indexAluno]).toFixed(1)} – Média: ${(vt_media[indexAluno]).toFixed(1)} - Menor média: ${menorMedia.toFixed(1)}`
+            msgResposta = `<br>Aluno: ${vt_alunos[indexAluno].nome} – N1: ${(vt_alunos[indexAluno].nota1).toFixed(1)} – N2: ${(vt_alunos[indexAluno].nota2).toFixed(1)} – N3: ${(vt_alunos[indexAluno].nota3).toFixed(1)} – Média: ${(vt_alunos[indexAluno].media).toFixed(1)} - Menor média: ${menorMedia.toFixed(1)}`
         }
         else {
             alert('Opção inexistente')
