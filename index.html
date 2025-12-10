@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de notas da Prof. Alice</title>
+</head>
+
+<body>
+    <h2>Cadastro de notas da Prof. Alice</h2>
+    Nome do aluno (pelo menos 9 caracteres): <input type="text" id="iptNome"><br>
+    Nota 1: <input type="number" id="iptNota1"><br>
+    Nota 2: <input type="number" id="iptNota2"><br>
+    Nota 3: <input type="number" id="iptNota3"><br>
+    <br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="listar()">Listar</button>
+    <button onclick="mostrarAluno()">Aluno</button>
+    <button onclick="mostrarMedia()">Média</button>
+    <button onclick="mostrarNotaMaiorQue()">Nota maior que</button>
+    <br>
+    <div id="resposta"></div>
+</body>
+
+</html>
+
+<script>
+    var vt_alunos = []
+    var vt_nota1 = []
+    var vt_nota2 = []
+    var vt_nota3 = []
+    var vt_media = []
+
+    function validarCadastro(nomeAluno, nota1, nota2, nota3) {
+        let msgErro = ''
+        if (nomeAluno.length < 9) {
+            msgErro += '<br>Tem que conter ao menos 9 caracteres'
+        }
+        if (vt_alunos.includes(nomeAluno)) {
+            msgErro += '<br>Já existe um aluno cadastrado com esse nome'
+        }
+        if (
+            nota1 < 0 || nota1 == '' ||
+            nota2 < 0 || nota2 == '' ||
+            nota3 < 0 || nota3 == ''
+        ) {
+            msgErro += '<br>As notas devem ser um numérico maior ou igual a zeros'
+        }
+
+        if (msgErro != '') {
+            resposta.innerHTML = msgErro
+            return false
+        } else {
+            return true
+        }
+    }
+
+    function cadastrar() {
+        let nomeAluno = iptNome.value
+        let nota1 = Number(iptNota1.value)
+        let nota2 = Number(iptNota2.value)
+        let nota3 = Number(iptNota3.value)
+        let media = (nota1 + nota2 + nota3) / 3
+
+        resposta.innerHTML = ''
+        if (validarCadastro(nomeAluno.trim(), iptNota1.value, iptNota2.value, iptNota3.value)) {
+
+            vt_alunos.push(nomeAluno)
+            vt_nota1.push(nota1)
+            vt_nota2.push(nota2)
+            vt_nota3.push(nota3)
+            vt_media.push(media)
+
+            alert('Aluno cadastrado com sucesso!')
+        }
+    }
+
+    function listar() {
+        let respostaPrompt = prompt('Escolha como quer listar: \n1: Do último para o primeiro \n2: Do primeiro para o último')
+        let msgResposta = ''
+
+        if (respostaPrompt == 1) {
+            for (i = vt_alunos.length - 1; i >= 0; i--) {
+                msgResposta += `<br>Aluno: ${vt_alunos[i]} – N1: ${(vt_nota1[i]).toFixed(1)} – N2: ${(vt_nota2[i]).toFixed(1)} – N3: ${(vt_nota3[i]).toFixed(1)} – Média: ${(vt_media[i]).toFixed(1)}`
+            }
+        }
+        else if (respostaPrompt == 2) {
+            for (i = 0; i < vt_alunos.length; i++) {
+                msgResposta += `<br>Aluno: ${vt_alunos[i]} – N1: ${(vt_nota1[i]).toFixed(1)} – N2: ${(vt_nota2[i]).toFixed(1)} – N3: ${(vt_nota3[i]).toFixed(1)} – Média: ${(vt_media[i]).toFixed(1)}`
+            }
+        } else {
+            alert('Opção inexistente')
+        }
+
+        resposta.innerHTML = ''
+        resposta.innerHTML = msgResposta
+    }
+
+    function mostrarAluno() {
+        let respostaPrompt = prompt('Digite o nome do aluno desejado')
+        let msgResposta = ''
+        let indexAluno = vt_alunos.indexOf(respostaPrompt)
+
+        if (indexAluno == -1) {
+            alert('Aluno não cadastrado')
+        } else {
+            msgResposta = `<br>Aluno: ${vt_alunos[indexAluno]} – N1: ${(vt_nota1[indexAluno]).toFixed(1)} – N2: ${(vt_nota2[indexAluno]).toFixed(1)} – N3: ${(vt_nota3[indexAluno]).toFixed(1)} – Média: ${(vt_media[indexAluno]).toFixed(1)}`
+        }
+
+        resposta.innerHTML = ''
+        resposta.innerHTML = msgResposta
+    }
+
+    function mostrarMedia() {
+        let respostaPrompt = prompt('Escolha qual média você deseja mostrar: \n1 - Maior média \n2 - Menor média')
+
+        let menorMedia = 10
+        let maiorMedia = 0
+        let msgResposta = ''
+        let indexAluno = 0
+
+        if (respostaPrompt == 1) {
+            for (let i = 0; i < vt_media.length; i++) {
+                if (vt_media[i] > maiorMedia) {
+                    maiorMedia = vt_media[i]
+                    indexAluno = i
+                }
+            }
+            msgResposta = `<br>Aluno: ${vt_alunos[indexAluno]} – N1: ${(vt_nota1[indexAluno]).toFixed(1)} – N2: ${(vt_nota2[indexAluno]).toFixed(1)} – N3: ${(vt_nota3[indexAluno]).toFixed(1)} – Média: ${(vt_media[indexAluno]).toFixed(1)} - Maior média: ${maiorMedia.toFixed(1)}`
+        }
+        else if (respostaPrompt == 2) {
+            for (let i = 0; i < vt_media.length; i++) {
+                if (vt_media[i] < menorMedia) {
+                    menorMedia = vt_media[i]
+                    indexAluno = i
+                }
+            }
+            msgResposta = `<br>Aluno: ${vt_alunos[indexAluno]} – N1: ${(vt_nota1[indexAluno]).toFixed(1)} – N2: ${(vt_nota2[indexAluno]).toFixed(1)} – N3: ${(vt_nota3[indexAluno]).toFixed(1)} – Média: ${(vt_media[indexAluno]).toFixed(1)} - Menor média: ${menorMedia.toFixed(1)}`
+        }
+        else {
+            alert('Opção inexistente')
+        }
+
+        resposta.innerHTML = ''
+        resposta.innerHTML = msgResposta
+    }
+
+    function mostrarNotaMaiorQue() {
+        let respostaPrompt = prompt('Digite o limite da nota')
+
+
+
+        resposta.innerHTML = msgResposta
+    }
+</script>
