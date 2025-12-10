@@ -35,8 +35,8 @@
         }
 
         let estaCadastrado = false
-        for(let i = 0; i < vt_alunos.length; i++) {
-            if(vt_alunos[i].nome == nomeAluno) {
+        for (let i = 0; i < vt_alunos.length; i++) {
+            if (vt_alunos[i].nome == nomeAluno) {
                 estaCadastrado = true
                 break
             }
@@ -107,19 +107,29 @@
     }
 
     function mostrarAluno() {
-        let respostaPrompt = prompt('Digite o nome do aluno desejado')
-        let msgResposta = ''
-        let indexAluno = vt_alunos.indexOf(respostaPrompt)
+        let respostaPrompt = prompt('Digite o nome do aluno desejado');
 
-        if (indexAluno == -1) {
-            alert('Aluno não cadastrado')
-        } else {
-            msgResposta = `<br>Aluno: ${vt_alunos[indexAluno]} – N1: ${(vt_nota1[indexAluno]).toFixed(1)} – N2: ${(vt_nota2[indexAluno]).toFixed(1)} – N3: ${(vt_nota3[indexAluno]).toFixed(1)} – Média: ${(vt_media[indexAluno]).toFixed(1)}`
+        let msgResposta = '';
+
+        var alunoCadastrado = false;
+
+        for (let i = 0; i < vt_alunos.length; i++) {
+            if (respostaPrompt == vt_alunos[i].nome) {
+                msgResposta = `<br>Aluno: ${vt_alunos[i].nome} – N1: ${(vt_alunos[i].nota1).toFixed(1)} – N2: ${(vt_alunos[i].nota2).toFixed(1)} – N3: ${(vt_alunos[i].nota3).toFixed(1)} – Média: ${(vt_alunos[i].media).toFixed(1)}`
+
+                resposta.innerHTML = ''
+                resposta.innerHTML = msgResposta
+                alunoCadastrado = true;
+            }
         }
-
-        resposta.innerHTML = ''
-        resposta.innerHTML = msgResposta
+        if (!alunoCadastrado) {
+            alert('Aluno não está cadastrado!')
+        }
     }
+
+
+
+
 
     function mostrarMedia() {
         let respostaPrompt = prompt('Escolha qual média você deseja mostrar: \n1 - Maior média \n2 - Menor média')
