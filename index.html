@@ -158,8 +158,23 @@
     function mostrarNotaMaiorQue() {
         let respostaPrompt = prompt('Digite o limite da nota')
 
+        if(respostaPrompt == null) {
+            return
+        }
 
+        let msgResposta = ''
 
+        for (let i = 0; i < vt_alunos.length; i++) {
+            if (
+                vt_alunos[i].nota1 > Number(respostaPrompt) ||
+                vt_alunos[i].nota2 > Number(respostaPrompt) ||
+                vt_alunos[i].nota3 > Number(respostaPrompt)
+            ) {
+                msgResposta += `<br>Aluno: ${vt_alunos[i].nome} – N1: ${(vt_alunos[i].nota1).toFixed(1)} – N2: ${(vt_alunos[i].nota2).toFixed(1)} – N3: ${(vt_alunos[i].nota3).toFixed(1)} – Média: ${(vt_alunos[i].media).toFixed(1)} - Nota maior que ${respostaPrompt}`
+            }
+        }
+
+        resposta.innerHTML = ''
         resposta.innerHTML = msgResposta
     }
 </script>
